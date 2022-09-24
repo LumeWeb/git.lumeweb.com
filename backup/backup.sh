@@ -9,6 +9,7 @@ su git
 
 s4cmd --endpoint-url=$S3_ENDPOINT put gitea*.zip s3://$S3_BUCKET_NAME
 
+export TZ="GMT"
 CUTOFF=$(date -d "${BACKUP_MAX_AGE}"' days ago' +%s)
 mapfile -t ITEMS < <(s3 ls s3://$S3_BUCKET_NAME/*)
 unset IFS
